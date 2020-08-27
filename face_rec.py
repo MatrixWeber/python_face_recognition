@@ -4,7 +4,7 @@ import numpy as np
 
 video_capture = cv2.VideoCapture(0)
 
-alex = fr.load_image_file("Foto Alexander Weber.JPG")
+alex = fr.load_image_file("IMG_3865_weniger_scharf.jpg")
 
 alex_face_encoding = fr.face_encodings(alex)[0]
 
@@ -22,7 +22,7 @@ while True:
         matches = fr.compare_faces(know_face_encodings, face_encoding)
         name = "Unknown"
         face_distance = fr.face_distance(know_face_encodings, face_encoding)
-        best_match_index = np.min(face_distance)
+        best_match_index = np.argmin(face_distance)
         if matches[best_match_index]:
             name = know_face_names[best_match_index]
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)

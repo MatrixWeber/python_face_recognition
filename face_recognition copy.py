@@ -2,7 +2,7 @@ import cv2
 
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-img = cv2.imread("Foto Alexander Weber.JPG")
+img = cv2.imread("180412_02.JPG")
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 

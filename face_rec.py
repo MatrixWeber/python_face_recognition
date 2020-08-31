@@ -9,7 +9,7 @@ while True:
 
     video_capture = cv2.VideoCapture(0)
 
-    alex = fr.load_image_file("Foto Alexander Weber.JPG")
+    alex = fr.load_image_file("mit_brille.JPG")
 
     alex_face_encoding = fr.face_encodings(alex)[0]
 

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import cv2
 import face_recognition as fr
 import numpy as np
@@ -52,11 +53,14 @@ while True:
                     if matches[best_match_index]:
                         name = know_face_names[best_match_index]
                         pag.press('enter')
-                        f = open("bla.txt", "r")
-                        pag.write(f.read())
+                        with open("bla.txt", "r") as f:
+                            pag.write(f.read())
                         pag.press('enter')   
                         wasDisconnected = False
-                        exit()
+                        video_capture.release()
+                        cv2.destroyAllWindows()
+                        video_capture = cv2.VideoCapture(0)
+                        break
         else:
             bt_status_connected = False
             wasDisconnected = True 
@@ -74,7 +78,7 @@ while True:
                 bt_status_info = subprocess.run(["bt-device", "-i", "Matrix"], capture_output=True)
                 if "Connected: 1" in str(bt_status_info.stdout):
                     bt_status_connected = True
-                    print("bluetooth connected")
+                    #print("bluetooth connected")
                     x_old,y_old = pag.position()
                 else:
                     sleep(2)

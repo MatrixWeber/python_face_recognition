@@ -5,6 +5,7 @@ import numpy as np
 from time import sleep
 import pyautogui as pag
 import subprocess
+from verbose import checkIfVerbose
 
     
 video_capture = cv2.VideoCapture(0)
@@ -34,7 +35,8 @@ while True:
         bt_status_info = subprocess.run(["bt-device", "-i", "Matrix"], capture_output=True)
         if wasDisconnected:
             x, y = pag.position()
-            #print("Get mouse position:" + str(x) + ":" + str(y))
+            if checkIfVerbose():
+                print("Get mouse position:" + str(x) + ":" + str(y))
         else:
             x = x_old
             y = y_old
@@ -52,7 +54,7 @@ while True:
                     best_match_index = np.argmin(face_distance)
                     if matches[best_match_index]:
                         name = know_face_names[best_match_index]
-                        pag.press('enter')
+                        #pag.press('enter')
                         with open("bla.txt", "r") as f:
                             pag.write(f.read())
                         pag.press('enter')   
@@ -69,16 +71,19 @@ while True:
         bt_status_info = subprocess.run(["bt-device", "-i", "Matrix"], capture_output=True)
         if "Trusted: 0" in str(bt_status_info.stdout):
             subprocess.run(["bluetoothctl", "trust", "3C:2E:FF:7A:58:03"])
-        #subprocess.run(["bluetoothctl", "disconnect", "3C:2E:FF:7A:58:03"])
+        #subprocess.run(["Kristina120804/
+        # ", "disconnect", "3C:2E:FF:7A:58:03"])
         connection_status_info = subprocess.run(["bluetoothctl", "connect", "3C:2E:FF:7A:58:03"], capture_output=True)
         connection_status = "Connection successful" in str(connection_status_info.stdout)
-        #print(str(connection_status_info.stdout))
+        if checkIfVerbose():
+            print(str(connection_status_info.stdout))
         if connection_status:
             while not bt_status_connected:
                 bt_status_info = subprocess.run(["bt-device", "-i", "Matrix"], capture_output=True)
                 if "Connected: 1" in str(bt_status_info.stdout):
                     bt_status_connected = True
-                    #print("bluetooth connected")
+                    if checkIfVerbose():
+                        print("bluetooth connected")
                     x_old,y_old = pag.position()
                 else:
                     sleep(2)

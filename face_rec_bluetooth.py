@@ -6,11 +6,13 @@ from time import sleep
 import pyautogui as pag
 import subprocess
 from verbose import checkIfVerbose
+from os import path
 
+path = path.dirname(__file__) + '/'
     
 video_capture = cv2.VideoCapture(0)
 
-alex = fr.load_image_file("IMG_3865_weniger_scharf.jpg")
+alex = fr.load_image_file(path + "IMG_3865_weniger_scharf.jpg")
 
 alex_face_encoding = fr.face_encodings(alex)[0]
 
@@ -55,7 +57,7 @@ while True:
                     if matches[best_match_index]:
                         name = know_face_names[best_match_index]
                         #pag.press('enter')
-                        with open("bla.txt", "r") as f:
+                        with open(path + "bla.txt", "r") as f:
                             pag.write(f.read())
                         pag.press('enter')   
                         wasDisconnected = False

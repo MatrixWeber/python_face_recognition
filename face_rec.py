@@ -3,13 +3,16 @@ import face_recognition as fr
 import numpy as np
 from time import sleep
 import pyautogui as pag
+from os import path
+
+path = path.dirname(__file__)
 
 
 while True:
 
     video_capture = cv2.VideoCapture(0)
 
-    alex = fr.load_image_file("mit_brille.JPG")
+    alex = fr.load_image_file(path + "/IMG_3865_weniger_scharf.jpg")
 
     alex_face_encoding = fr.face_encodings(alex)[0]
 

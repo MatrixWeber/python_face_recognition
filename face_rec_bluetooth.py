@@ -27,6 +27,7 @@ y = 0
 bt_status_connected = False
 x_old,y_old = pag.position()
 wasDisconnected = False
+pag.FAILSAFE = False  # disable aborting for mouse moving to a corner of the screen
 
 bt_status_info = subprocess.run(["bt-device", "-i", "Matrix"], capture_output=True)
 if "Connected: 1" in str(bt_status_info.stdout):
@@ -57,6 +58,10 @@ while True:
                     if matches[best_match_index]:
                         name = know_face_names[best_match_index]
                         #pag.press('enter')
+                        bt_status_info = subprocess.run(["xset", "-q"], capture_output=True)
+                        if "Group 2:     on" in str(bt_status_info.stdout):
+                            pag.hotkey('shift', 'alt')
+                            sleep(0.1)
                         with open(path + "bla.txt", "r") as f:
                             pag.write(f.read())
                         pag.press('enter')   

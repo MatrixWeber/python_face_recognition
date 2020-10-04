@@ -12,7 +12,7 @@ path = path.dirname(__file__) + '/'
     
 video_capture = cv2.VideoCapture(0)
 
-alex = fr.load_image_file(path + "IMG_3865_weniger_scharf.jpg")
+alex = fr.load_image_file(path + "C:/Users/Alex/Desktop/IMG_3792.jpg")
 
 alex_face_encoding = fr.face_encodings(alex)[0]
 

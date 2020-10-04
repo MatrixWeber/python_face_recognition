@@ -12,13 +12,13 @@ while True:
 
     video_capture = cv2.VideoCapture(0)
 
-    alex = fr.load_image_file(path + "/IMG_3865_weniger_scharf.jpg")
+    alex = fr.load_image_file(path + "/alex_klein.PNG")
+    sergej = fr.load_image_file(path + "/sergej.PNG")
+    face_encodings = fr.face_encodings(alex)[0]
+    face_encodings += fr.face_encodings(sergej)[0]
+    know_face_encodings = [fr.face_encodings(sergej)[0], fr.face_encodings(alex)[0]]
 
-    alex_face_encoding = fr.face_encodings(alex)[0]
-
-    know_face_encodings = [alex_face_encoding]
-
-    know_face_names = ["Alex"]
+    know_face_names = ["Sergej", "Alex"]
 
     while True:
         ret, frame = video_capture.read()
@@ -33,10 +33,10 @@ while True:
             best_match_index = np.argmin(face_distance)
             if matches[best_match_index]:
                 name = know_face_names[best_match_index]
-            cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-            cv2.rectangle(frame, (left, bottom - 35), (right, bottom),  (0, 0, 255), cv2.FILLED)
+            cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
+            cv2.rectangle(frame, (left, bottom - 35), (right, bottom),  (0, 255, 0), cv2.FILLED)
             font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(frame, name, (left + 6, bottom + 6), font, 1.0, (255, 255, 255), 1)
+            cv2.putText(frame, name, (left + 20, bottom), font, 1.0, (255, 255, 255), 1)
 
 
         cv2.imshow("Webcam_facereg", frame)

@@ -36,6 +36,9 @@ if "Connected: 1" in str(bt_status_info.stdout):
 while True:
     if bt_status_connected:
         bt_status_info = subprocess.run(["bt-device", "-i", "Matrix"], capture_output=True)
+        # button7location = pag.locateOnScreen('IMG_3934-min.png')
+        # while button7location == None:
+        #     button7location = pag.locateOnScreen('IMG_3934-min.png', confidence=0.5)
         if wasDisconnected:
             x, y = pag.position()
             if checkIfVerbose():
